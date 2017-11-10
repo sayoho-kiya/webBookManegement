@@ -1,0 +1,63 @@
+@charset "UTF-8";
+* {
+	font-family: Meiryo;
+	font-size  : 12px; 
+}
+
+body {
+	background: #fff;
+}
+
+h1 {
+	background:#eee;
+	padding: 5px;
+	border : 1px solid #ccc;
+}
+
+table.table_form {
+	background: #fff;
+	padding: 5px;
+	margin : 15px auto;
+	border : 1px solid #ccc;
+}
+
+table.table_list {
+	background: #fff;
+	word-wrap   : break-word;
+	border : 1px solid #ccc;
+}
+
+th,td {
+	border : 1px solid #ccc;
+}
+
+td.int {
+	text-align: right;
+}
+
+td.button {
+	text-align: center;
+}
+
+select.list {
+	width  : 100px;
+}
+
+div.login_pane {
+	background: #fff;
+	width  : 500px;
+	padding: 10px;
+	margin : 30px auto;
+	border : 1px solid #ccc;
+}
+
+input.common_button {
+	width  : 60px;
+	color  : #fff;
+	font-size : 10px;
+	text-align: center;
+	padding: 10px 0 10px;
+	margin : 15px auto;
+	border-radius   : 5px;
+	background-color: #f08080;
+}
