@@ -9,8 +9,7 @@ public class LoginUserBean implements Serializable {
 	// ID
 	private String name;
 	// 名前
-	private int age;
-	// 年齢
+	private String mailaddres;
 
 	/**
 	 * コンストラクタ.<br>
@@ -23,7 +22,7 @@ public class LoginUserBean implements Serializable {
 
 		this.name = "";
 
-		this.age = 0;
+		this.mailaddres = "";
 	}
 
 	/**
@@ -72,8 +71,8 @@ public class LoginUserBean implements Serializable {
 	 *
 	 * @return 年齢
 	 */
-	public int getAge() {
-		return this.age;
+	public String getAddres() {
+		return this.mailaddres;
 	}
 
 	/**
@@ -82,7 +81,7 @@ public class LoginUserBean implements Serializable {
 	 * @param age
 	 *            年齢
 	 */
-	public void setAge(int age) {
-		this.age = age;
+	public void setAddres(String mailaddres) {
+		this.mailaddres = mailaddres;
 	}
 }

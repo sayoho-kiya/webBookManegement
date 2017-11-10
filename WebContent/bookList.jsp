@@ -1,28 +1,60 @@
 <%@ page import="java.util.ArrayList"%>
+<%@ page import="book.ItemBean" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
-<%--<jsp:useBean id="user"  scope="session" class="book.ItemBean"/>--%>
 
-<%-- Java入門 商品一覧画面 --%>
+
 <!DOCTYPE html>
 <html>
 	<head>
 	
-		<title>Java入門</title>
+		<title>書籍貸出管理</title>
 	</head>
 	<body>
-		<jsp:include page="./header.jsp"/>
-		<h1>書籍一覧</h1>
-			<table class="table_list">
+	<form action="./UpdateBookServlet" method="post">
+		<link href="./root.css" rel="stylesheet" type="text/css" />
+		<h1>登録書籍一覧</h1>
+		<input class="common_button" type="button" onclick="location.href='./login.jsp'" value="戻る">
+			<input class="common_button" type="submit" onclick="location.href='./bookRegister.jsp'"value="新規登録" name="a">
+		
+		<%	ArrayList<ItemBean> bookList=(ArrayList<ItemBean>)request.getAttribute("bookList"); %>
+			<table class="table_list" border="1" >
 				<tbody>
 					<tr>
-						<th>商品ID</th>
-						<th>商品名</th>
-						<th>価格</th>
-						<th>在庫数</th>
-						<th>数量</th>
+						<th>書籍ID</th>
+						<th>書籍名</th>
+						<th>出版社</th>
+						<th>著者</th>
+						<th>ジャンル</th>
+						<th>評価</th>
+						<th>エリア</th>
+						<th>定価</th>
 					</tr>
+					<%-- Beanの要素数分（商品の種類分）テーブルを作成 --%>
+					<% for(ItemBean bean : bookList) {
+					String bookinfo[]=new String[8];
+					bookinfo[0]=bean.getTitle();
+					bookinfo[1]=bean.getPublisher();
+					bookinfo[2]=bean.getAuthor();
+					bookinfo[3]=bean.getGenre();
+					bookinfo[4]=bean.getEval();
+					bookinfo[5]=bean.getArea();
+					bookinfo[6]=bean.getPrice();
+					bookinfo[7]=bean.getPid();
+					%><tr><%
+					for(int i=0;i<7;i++){
+					%>
+					
+					<td><%= bookinfo[i] %></td>
+				<%} %>
+						<td class="button">
+							<input class="common_button" type="submit" value="編集" name="<%= bookinfo[0]%>">
+								<% for(int i=0;i<8;i++){ %>
+						<input type="hidden" value="<%= bookinfo[i] %>" name="<%= bookinfo[0]%>">
+						</td></tr>
+					<% } %>
+					<% } %>
 				</tbody>
 			</table>
-			<input class="common_button" type="button" onclick="location.href='./login.jsp'" value="戻る">
+			</form>
 	</body>
 </html>

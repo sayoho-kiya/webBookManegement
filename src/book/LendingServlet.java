@@ -1,14 +1,13 @@
 package book;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class LendingServlet
@@ -40,24 +39,19 @@ public class LendingServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
 
 		request.setCharacterEncoding("UTF-8");
-
-		//画面移動の準備
-		HttpSession session = request.getSession();
-		//セッション
-		//
-		RequestDispatcher rd;
-		//画面の情報
-		ServletContext con = request.getServletContext();
-
+		//書籍一覧を取得
 		Lending lending = new Lending();
-		ItemBean bean = lending.getBookInfomation();
-		//List<String[]> list = lending.getBookInfomation();
-		//list.toArray(new String[0][0]);
+		ArrayList<ItemBean> bookList = lending.getBookInfomation();
 
-		//rd = con.getRequestDispatcher("./itemList.jsp");
+		//書籍一覧をリクエストスコープの属性にセット
+		request.setAttribute("bookList", bookList);
+
+		// 書籍一覧画面に移動
+		RequestDispatcher rd = request.getRequestDispatcher("./LendbookList.jsp");
+		rd.forward(request, response);
 
 	}
 

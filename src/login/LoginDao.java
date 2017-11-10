@@ -22,7 +22,7 @@ public class LoginDao {
 			con = DriverManager.getConnection(url, user, pw);
 
 			//SQL文を作成
-			ps = con.prepareStatement("select name,age from user where id=? and pass= ?");
+			ps = con.prepareStatement("select name,addres from user where id=? and pass=?;");
 			ps.setString(1, id);
 			ps.setString(2, pass);
 			rs = ps.executeQuery();

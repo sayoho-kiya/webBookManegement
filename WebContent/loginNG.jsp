@@ -5,6 +5,7 @@
 <html>
 	<head>
 		<title>Java入門</title>
+		<link href="./login.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
 		<h1>ログインエラー</h1>
