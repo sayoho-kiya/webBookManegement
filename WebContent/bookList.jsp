@@ -14,13 +14,13 @@
 		<link href="./root.css" rel="stylesheet" type="text/css" />
 		<h1>登録書籍一覧</h1>
 		<input class="common_button" type="button" onclick="location.href='./login.jsp'" value="戻る">
-			<input class="common_button" type="submit" onclick="location.href='./bookRegister.jsp'"value="新規登録" name="a">
+			<input class="common_button" type="button" onclick="location.href='./bookRegister.jsp'"value="新規登録" name="a">
 		
 		<%	ArrayList<ItemBean> bookList=(ArrayList<ItemBean>)request.getAttribute("bookList"); %>
-			<table class="table_list" border="1" >
+			<table class="table_list" border="1"  width="80%">
 				<tbody>
 					<tr>
-						<th>書籍ID</th>
+						
 						<th>書籍名</th>
 						<th>出版社</th>
 						<th>著者</th>
@@ -28,6 +28,8 @@
 						<th>評価</th>
 						<th>エリア</th>
 						<th>定価</th>
+						<th></th>
+						
 					</tr>
 					<%-- Beanの要素数分（商品の種類分）テーブルを作成 --%>
 					<% for(ItemBean bean : bookList) {
@@ -41,11 +43,12 @@
 					bookinfo[6]=bean.getPrice();
 					bookinfo[7]=bean.getPid();
 					%><tr><%
-					for(int i=0;i<7;i++){
+					for(int i=0;i<6;i++){
 					%>
 					
 					<td><%= bookinfo[i] %></td>
 				<%} %>
+				<td>\<%= bookinfo[6] %></td>
 						<td class="button">
 							<input class="common_button" type="submit" value="編集" name="<%= bookinfo[0]%>">
 								<% for(int i=0;i<8;i++){ %>

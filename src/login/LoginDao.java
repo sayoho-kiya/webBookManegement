@@ -33,6 +33,43 @@ public class LoginDao {
 		return rs;
 	}
 
+	//履歴を取得
+	public ResultSet selectHistory(String name) throws SQLException {
+		try {
+			//JDBCドライバのロード
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(url, user, pw);
+
+			//SQL文を作成
+			ps = con.prepareStatement("select title,publisher,author,genre,evaluation,out_date,in_date,"
+					+ "sche_date,impressions from book_list inner join lend_list on lend_list.pid=book_list.pid where name='" + name + "';");
+			rs = ps.executeQuery();
+		} catch (ClassNotFoundException ce) {
+			//JDBCドライバが見つからなかった場合
+			ce.printStackTrace();
+		}
+		return rs;
+	}
+
+	//ログインユーザーに貸出中の本を取得
+	public ResultSet getLendtitle(String name) throws SQLException {
+		try {
+			//JDBCドライバのロード
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(url, user, pw);
+
+			//SQL文を作成
+			ps = con.prepareStatement("select title from lend_list inner join book_list on "
+					+ "lend_list.pid=book_list.pid where name='" + name + "'and in_date is null;");
+			rs = ps.executeQuery();
+		} catch (ClassNotFoundException ce) {
+			//JDBCドライバが見つからなかった場合
+			ce.printStackTrace();
+		}
+
+		return rs;
+	}
+
 	public void close() {
 		try {
 			con.close();

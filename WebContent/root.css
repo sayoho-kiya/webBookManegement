@@ -12,7 +12,10 @@ h1 {
 	background:#eee;
 	padding: 5px;
 	border : 1px solid #ccc;
+	font-size  : 15px; 
 }
+
+
 
 table.table_form {
 	background: #fff;
@@ -59,5 +62,13 @@ input.common_button {
 	padding: 10px 0 10px;
 	margin : 15px auto;
 	border-radius   : 5px;
-	background-color: #f08080;
+	background-color: #006a6c;
+}
+input.common_button:hover {
+  top: -4px;
+  box-shadow: 0 2px 0 #696969;
+}
+input.common_button:active {
+  top: 3px;
+  box-shadow: none;
 }

@@ -15,6 +15,10 @@ public class ItemBean implements Serializable {
 	private String area;
 	private String price;
 	private int state;
+	private String out_date;
+	private String sche_date;
+	private String in_date;
+	private int evaluation;
 
 	/**
 	 * コンストラクタ.<br>
@@ -30,6 +34,10 @@ public class ItemBean implements Serializable {
 		area = "";
 		price = "";
 		state = 0;
+		out_date = "";
+		sche_date = "";
+		in_date = "";
+		evaluation = 0;
 
 	}
 
@@ -103,6 +111,38 @@ public class ItemBean implements Serializable {
 
 	public void setState(int state) {
 		this.state = state;
+	}
+
+	public String getOutdate() {
+		return out_date;
+	}
+
+	public void setOutdate(String out_date) {
+		this.out_date = out_date;
+	}
+
+	public String getSchedate() {
+		return sche_date;
+	}
+
+	public void setSchedate(String sche_date) {
+		this.sche_date = sche_date;
+	}
+
+	public String getIndate() {
+		return in_date;
+	}
+
+	public void setIndate(String in_date) {
+		this.in_date = in_date;
+	}
+
+	public int getEvaluation() {
+		return evaluation;
+	}
+
+	public void setEvaluation(int evaluation) {
+		this.evaluation = evaluation;
 	}
 
 }

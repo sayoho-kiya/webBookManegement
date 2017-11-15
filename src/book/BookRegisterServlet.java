@@ -47,7 +47,6 @@ public class BookRegisterServlet extends HttpServlet {
 		// ①-1 ボタン名の文字化けを防ぐために文字コードを設定してから取得
 
 		request.setCharacterEncoding("UTF-8");
-		String btn = request.getParameter("submit");
 
 		//		// ② 画面移動の準備
 		HttpSession session = request.getSession();
@@ -59,6 +58,8 @@ public class BookRegisterServlet extends HttpServlet {
 
 		//情報を取得
 
+		String btn = request.getParameter("submit");
+		System.out.println(btn);
 		String title = request.getParameter("title");
 		String publisher = request.getParameter("publisher");
 		String author = request.getParameter("author");
@@ -70,13 +71,30 @@ public class BookRegisterServlet extends HttpServlet {
 
 		BookRegisterDao dao = new BookRegisterDao();
 		// ③-1-4 ID処理クラスに②-1-1で取得したIDを渡してユーザ情報をモデルに格納
-
 		int rs = 0;
-		try {
-			rs = dao.registerBook(title, publisher, author, genre, area, price);
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(request.getParameter("submit").equals("編集登録")) {
+			String pid = request.getParameter("pid");
+			try {
+				rs = dao.updateBook(pid, title, publisher, author, genre, area, price);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else if(request.getParameter("submit").equals("削除")) {
+			String pid = request.getParameter("pid");
+			try {
+				rs = dao.deleteBook(pid);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else {
+
+			try {
+				rs = dao.registerBook(title, publisher, author, genre, area, price);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
+
 		if(rs == 1) {
 			rd = request.getRequestDispatcher("/bookRegisterOK.jsp");
 			rd.forward(request, response);

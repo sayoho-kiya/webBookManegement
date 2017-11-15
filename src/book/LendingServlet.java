@@ -46,7 +46,7 @@ public class LendingServlet extends HttpServlet {
 		Lending lending = new Lending();
 		ArrayList<ItemBean> bookList = lending.getBookInfomation();
 
-		//書籍一覧をリクエストスコープの属性にセット
+		//書籍一覧・履歴をリクエストスコープの属性にセット
 		request.setAttribute("bookList", bookList);
 
 		// 書籍一覧画面に移動

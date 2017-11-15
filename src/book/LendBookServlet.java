@@ -46,7 +46,13 @@ public class LendBookServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String btn = request.getParameter("submit");
 
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
+		System.out.println("セッションなしのため作成2");
+		if(session == null) {
+			session = request.getSession();
+			String userbean = (String) session.getAttribute("user");
+			request.setAttribute("user", userbean);
+		}
 
 		RequestDispatcher rd;
 
@@ -76,40 +82,19 @@ public class LendBookServlet extends HttpServlet {
 					rd = request.getRequestDispatcher("/LendBookConfirm.jsp");
 					rd.forward(request, response);
 				} else if("返却".equals(request.getParameter(title))) {
+					ItemBean rtnbean = new ItemBean();
+					rtnbean.setTitle(name[1]);
+					rtnbean.setPublisher(name[2]);
+					rtnbean.setAuthor(name[3]);
+					rtnbean.setPid(name[4]);
 
-					session.setAttribute("rtninfo", bean);
+					session.setAttribute("rtninfo", rtnbean);
 					rd = request.getRequestDispatcher("/returnBookConfirm.jsp");
 					rd.forward(request, response);
 
 				}
 			}
 		}
-		//Enumeration names = request.getParameterNames();
-		//while(names.hasMoreElements()) {
-		//String name[] = (String[]) names.nextElement();
-
-		//String name = request.getParameterValues("bookinfo[]");
-
-		//String title = request.getParameter("<%= bean.getTitle() %>");
-		//if(info != null) {
-		//for(int i = 0; i < info.length; i++) {
-		//	bean.setTitle(name[0]);
-		//	bean.setPublisher(name[1]);
-		//	bean.setAuthor(name[2]);
-		//	for(int i = 0; i < name.length; i++) {
-		//		System.out.println(name[i]);
-		//}
-		//bean.setPublisher(info[1]);
-		//bean.setAuthor(info[2]);
-		//}
-
-		//if(bean != null) {
-
-		//	}
-
-		//}
-
-		//}
 
 	}
 }

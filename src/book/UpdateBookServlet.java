@@ -82,31 +82,5 @@ public class UpdateBookServlet extends HttpServlet {
 			}
 		}
 	}
-	//Enumeration names = request.getParameterNames();
-	//while(names.hasMoreElements()) {
-	//String name[] = (String[]) names.nextElement();
-
-	//String name = request.getParameterValues("bookinfo[]");
-
-	//String title = request.getParameter("<%= bean.getTitle() %>");
-	//if(info != null) {
-	//for(int i = 0; i < info.length; i++) {
-	//	bean.setTitle(name[0]);
-	//	bean.setPublisher(name[1]);
-	//	bean.setAuthor(name[2]);
-	//	for(int i = 0; i < name.length; i++) {
-	//		System.out.println(name[i]);
-	//}
-	//bean.setPublisher(info[1]);
-	//bean.setAuthor(info[2]);
-	//}
-
-	//if(bean != null) {
-
-	//	}
-
-	//}
-
-	//}
 
 }

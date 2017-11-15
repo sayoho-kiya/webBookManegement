@@ -57,35 +57,55 @@ public class LendRegisterServlet extends HttpServlet {
 		//		// 画面の情報
 		//ServletContext con = request.getServletContext();
 
-		// ③-1-1 ログイン画面で入力された情報を取得
-
-		String date = request.getParameter("date");
-		String id = ((login.LoginUserBean) request.getSession().getAttribute("user")).getId();
-		System.out.println(id);
-		ItemBean bean = new ItemBean();
-		bean = ((ItemBean) session.getAttribute("info"));
-		String pid = bean.getPid();
-
 		String name = ((login.LoginUserBean) session.getAttribute("user")).getName();
-
-		// ③-1-3 ログイン処理クラスをインスタンス化
-
 		LendRegisterDao dao = new LendRegisterDao();
-		// ③-1-4 ID処理クラスに②-1-1で取得したIDを渡してユーザ情報をモデルに格納
+		String pid = request.getParameter("pid");
 
-		int rs = 0;
-		try {
-			rs = dao.registerLend(pid, name, date);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		if(rs == 1) {
-			rd = request.getRequestDispatcher("/bookRegisterOK.jsp");
-			rd.forward(request, response);
+		//★貸出登録の時
 
-		} else {
-			rd = request.getRequestDispatcher("/registerNG.jsp");
-			rd.forward(request, response);
+		// ③-1-1 ログイン画面で入力された情報を取得
+		if(btn.equals("貸出登録")) {
+			String date = request.getParameter("date");
+
+			// ③-1-3 ログイン処理クラスをインスタンス化
+
+			// ③-1-4 ID処理クラスに②-1-1で取得したIDを渡してユーザ情報をモデルに格納
+
+			int rs = 0;
+			try {
+				rs = dao.registerLend(pid, name, date);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			if(rs == 1) {
+				rd = request.getRequestDispatcher("/bookRegisterOK.jsp");
+				rd.forward(request, response);
+
+			} else {
+				rd = request.getRequestDispatcher("/registerNG.jsp");
+				rd.forward(request, response);
+
+			}
+		} else if(btn.equals("返却登録")) {
+			//★返却登録の時
+			String impressions = request.getParameter("impressions");
+			String evaluation = request.getParameter("evaluation");
+
+			int rs = 0;
+			try {
+				rs = dao.registerReturn(pid, name, evaluation, impressions);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			if(rs == 1) {
+				rd = request.getRequestDispatcher("/bookRegisterOK.jsp");
+				rd.forward(request, response);
+
+			} else {
+				rd = request.getRequestDispatcher("/registerNG.jsp");
+				rd.forward(request, response);
+
+			}
 
 		}
 	}
